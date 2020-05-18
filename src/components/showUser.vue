@@ -1,0 +1,57 @@
+
+<template>
+<div> 
+<navbar/>
+    <div class="auth-layout p-5 d-flex justify-content-center align-items-center">
+        <div class="auth-content p-5">
+            <div class="card text-center">
+                <div class="card-header" style="font-weight: bold;">
+                    {{posts.first_name}} {{posts.last_name}} 
+                </div>
+                <span style="font-weight: bold"></span>
+                <div class="card-body">
+                    <p class="card-text"><span style="font-weight: bold">Avatar:</span> {{posts.avatar}}</p>
+                    <p class="card-text"><span style="font-weight: bold">Email:</span>  {{posts.email}}</p>
+                </div>
+            </div>       
+        </div>
+    </div>
+</div>
+</template>
+
+<script>
+import navbar from '../components/navbar'
+import axios from 'axios'
+
+
+    export default{
+        name: 'showUser',
+        data(){
+
+            return{
+                posts:[],
+                
+
+            }
+        },
+        
+        components:{
+            navbar
+        },
+        created(){
+            var id = this.$route.params.id;
+            var link = 'https://reqres.in/api/users/'+id
+            axios.get(link).then(posts =>{
+                this.posts=posts.data.data
+                
+              
+            })
+        },
+
+        
+    }
+</script>
+
+<style>
+
+</style>
