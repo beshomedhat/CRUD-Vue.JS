@@ -3,19 +3,21 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
-import posts from './components/posts'
+
 import home from './components/home'
-import post from './components/post'
+
 import createUser from './components/createUser'
 import showUser from './components/showUser'
 import updateUser from './components/updateUser'
-import updatePost from './components/updatePost'
+
 import users from './components/users'
 import login from './components/login'
 import register from './components/register'
 import index from './components/index'
 import resources from './components/resources'
 import showResource from './components/showResource'
+
+
 
 
 Vue.use(VueRouter);
@@ -29,18 +31,7 @@ const routes = [
     path: '/home' ,
     component: home
   },
-  {
-    path: '/updatePost/:id' ,
-    component: updatePost
-  },
-  {
-    path: '/post/:id' ,
-    component: post
-  },
-  {
-    path: '/posts' ,
-    component: posts
-  },
+
   {
     path: '/createUser' ,
     component: createUser

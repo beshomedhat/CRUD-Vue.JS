@@ -56,7 +56,10 @@ import axios from 'axios'
         },
         methods:{
             empty(){
-                if(document.getElementById('exampleInputEmail1').value=='' || document.getElementById('exampleInputPassword1').value==''){
+                if(document.getElementById('exampleInputEmail1').value=='' 
+                || document.getElementById('exampleInputPassword1').value==''
+                ||document.getElementById('exampleInputFirstName').value==''
+                ||document.getElementById('exampleInputLastName').value==''){
                     return true;
                 }
                 
@@ -86,7 +89,11 @@ import axios from 'axios'
                     }
                     
 
-                })
+                },
+                err =>{
+                     console.log(err)
+                }
+                )
                 
                 }
             }

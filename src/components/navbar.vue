@@ -1,10 +1,29 @@
 <template>
+<div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+        <ul class="navbar-nav">
+          <li class="nav-item mx-4">
+            <router-link style="color: white; font-weight: bold;" class="nav-link" :to="'../resources'" >Resources</router-link>
+          </li>  
+          <li class="nav-item mx-4">
+            <router-link style="color: white; font-weight: bold;" class="nav-link" :to="'../users'" >Users</router-link>
+          </li>
+          <li class="nav-item mx-4">
+            <a style="cursor: pointer; color: white; font-weight: bold;" @click="logout()" class="nav-link" >Logout</a>
+          </li>
+      
+        </ul>
+      </div>
+    </nav>
 
 
-<nav class="nav nav-pills nav-fill">
-  <router-link style="font-size: 26 px; font-weight: bold" class="nav-item  btn-primary py-3" :to="'../resources'" >Resources</router-link>
-  <router-link style="font-size: 26 px; font-weight: bold" class="nav-item  btn-danger py-3" :to="'../users'" >Users</router-link>
-</nav>
+</div>
+
 
 </template>
 
@@ -20,7 +39,10 @@ import axios from 'axios'
             }
         },
         methods:{
-            
+            logout(){
+                localStorage.removeItem("loginToken");               
+                this.$router.push('../login');               
+            }
         }
         
     }

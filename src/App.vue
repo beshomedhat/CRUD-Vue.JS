@@ -7,13 +7,13 @@
 
 <script>
 import HelloWorld from './components/HelloWorld'
-import postsExample from './components/posts'
+
 import home from './components/home'
-import post from './components/post'
+
 import createUser from './components/createUser'
 import showUser from './components/showUser'
 import updateUser from './components/updateUser'
-import updatePost from './components/updatePost'
+
 import users from './components/users'
 import login from './components/login'
 import register from './components/register'
@@ -26,10 +26,9 @@ export default {
   name: 'App',
   components: {
     HelloWorld,
-    postsExample,
+
     home,
-    updatePost,
-    post,
+
     createUser,
     showUser,
     updateUser,
