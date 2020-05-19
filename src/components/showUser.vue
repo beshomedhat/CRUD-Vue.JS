@@ -45,7 +45,10 @@ import axios from 'axios'
                 this.posts=posts.data.data
                 
               
-            })
+            },
+                err =>{
+                     console.log(err)
+                })
         },
         methods:{
             deleteUser(id){
@@ -53,6 +56,9 @@ import axios from 'axios'
                 axios.delete(link)
                 .then(response => {
                     alert( 'DELETE and response.status'+ response.status)
+                },
+                err =>{
+                     console.log(err)
                 })
             },
             accessPage(){

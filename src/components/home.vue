@@ -10,12 +10,12 @@
 <script>
 
 import navbar from '../components/navbar'
-import post from '../components/post'
+
 import createUser from '../components/createUser'
 import showUser from '../components/showUser'
 import updateUser from '../components/updateUser'
 import users from '../components/users'
-import postsExample from '../components/posts'
+
 import resources from '../components/resources'
 import showResource from '../components/showResource'
 
@@ -30,8 +30,6 @@ import axios from 'axios';
             }
         },
         components: {
-            postsExample,
-            post,
             createUser,
             showUser,
             updateUser,
@@ -47,7 +45,12 @@ import axios from 'axios';
                 axios.delete(link)
                 .then(response => {
                     alert( 'DELETE and response.status'+ response.status)
-                })
+                }
+                ,
+                err =>{
+                     console.log(err)
+                }
+                )
             },
             accessPage(){
                 if(localStorage.getItem("loginToken") ==null)

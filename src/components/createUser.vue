@@ -64,6 +64,9 @@ import axios from 'axios'
                 })
                 .then(response => {
                     alert("response.status = " + response.status);
+                },
+                err =>{
+                     console.log(err)
                 })
                 }
                 

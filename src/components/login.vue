@@ -76,6 +76,9 @@ import axios from 'axios'
                     }
                     
 
+                },
+                err =>{
+                     console.log(err)
                 })
                 
                 }

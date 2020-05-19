@@ -44,10 +44,11 @@ import axios from 'axios'
             var link = 'https://reqres.in/api/unknown/'+id
             axios.get(link).then(posts =>{
                 this.posts=posts.data.data
-                console.log(id);
-                console.log(this.posts);
-              
-            })
+                              
+            },
+                err =>{
+                     console.log(err)
+                })
         },
         methods:{
             deleteUser(id){
@@ -55,6 +56,9 @@ import axios from 'axios'
                 axios.delete(link)
                 .then(response => {
                     alert( 'DELETE and response.status'+ response.status)
+                },
+                err =>{
+                     console.log(err)
                 })
             },
             accessPage(){

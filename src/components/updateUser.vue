@@ -14,7 +14,7 @@
                     <input class="form-control" id="job" name="job"  >
                 </div> 
                 <div class="text-center">
-                    <button @click="postPost()" id="btnSubmit" class="btn btn-outline-primary form-control">Save</button>
+                    <button @click="updateUser()" id="btnSubmit" class="btn btn-outline-primary form-control">Save</button>
                 </div>
 
             </div>
@@ -49,7 +49,7 @@ import axios from 'axios'
                 }
                 
             },
-            postPost(){
+            updateUser(){
                 if(this.empty()){
                     alert('enter your data');
                 }
@@ -64,19 +64,14 @@ import axios from 'axios'
                 })
                 .then(response => {
                     alert("response.status = " + response.status);
+                },
+                err =>{
+                     console.log(err)
                 })
                 }
                 
-            }
-        },
-        methods:{
-            deleteUser(id){
-                var link = 'https://reqres.in/api/users/'+id
-                axios.delete(link)
-                .then(response => {
-                    alert( 'DELETE and response.status'+ response.status)
-                })
             },
+
             accessPage(){
                 if(localStorage.getItem("loginToken") ==null)
                 {
