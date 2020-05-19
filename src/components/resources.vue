@@ -1,8 +1,9 @@
 <template>
-<div>
+<div >
 <navbar/>
-    <div class="container">
-        <table class="table">
+    <div class="container my-4">
+    <center><h1>Resources</h1></center>
+        <table class="table mt-4">
                 <thead class="thead-dark">
                   <tr>
                     
@@ -57,6 +58,24 @@ import axios from 'axios'
         },
         components:{
             navbar
+        },
+        methods:{
+            deleteUser(id){
+                var link = 'https://reqres.in/api/users/'+id
+                axios.delete(link)
+                .then(response => {
+                    alert( 'DELETE and response.status'+ response.status)
+                })
+            },
+            accessPage(){
+                if(localStorage.getItem("loginToken") ==null)
+                {
+                    this.$router.push('../login');
+                }
+            }
+        },
+        beforeMount(){
+            this.accessPage()
         }
     }
 </script>

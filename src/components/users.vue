@@ -2,7 +2,8 @@
 <div>
 <navbar/>
     <div class="container">
-    <router-link class="btn btn-outline-primary m-2" :to="'./createUser'" ><i class="fa fa-plus fa-lg"></i> </router-link>
+    
+    <router-link class="btn btn-outline-primary m-2" :to="'./createUser'" ><span>Create User</span> <i class="fa fa-plus fa-lg"></i> </router-link>
         <table class="table">
                 <thead class="thead-dark">
                   <tr>                    
@@ -54,10 +55,19 @@ import axios from 'axios'
                 .then(response => {
                     alert( 'DELETE and response.status'+ response.status)
                 })
+            },
+            accessPage(){
+                if(localStorage.getItem("loginToken") ==null)
+                {
+                    this.$router.push('../login');
+                }
             }
         },
         components:{
             navbar
+        },
+        beforeMount(){
+            this.accessPage()
         }
     }
 </script>

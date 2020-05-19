@@ -40,6 +40,24 @@ import axios from 'axios';
             resources,
             showResource
             
+        },
+        methods:{
+            deleteUser(id){
+                var link = 'https://reqres.in/api/users/'+id
+                axios.delete(link)
+                .then(response => {
+                    alert( 'DELETE and response.status'+ response.status)
+                })
+            },
+            accessPage(){
+                if(localStorage.getItem("loginToken") ==null)
+                {
+                    this.$router.push('../login');
+                }
+            }
+        },
+        beforeMount(){
+            this.accessPage()
         }
         
     }
