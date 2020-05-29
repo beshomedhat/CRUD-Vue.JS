@@ -6,13 +6,13 @@
         <div class="auth-content p-5">
             <div class="card text-center">
                 <div class="card-header" style="font-weight: bold;">
-                    {{posts.name}}
+                    {{post.name}}
                 </div>
                 <span style="font-weight: bold"></span>
                 <div class="card-body">
-                    <p class="card-text"><span style="font-weight: bold">Color:</span> {{posts.color}}</p>
-                    <p class="card-text"><span style="font-weight: bold">Pantone Value:</span>  {{posts.pantone_value}}</p>
-                    <p class="card-text"><span style="font-weight: bold">year:</span>  {{posts.year}}</p>
+                    <p class="card-text"><span style="font-weight: bold">Color:</span> {{post.color}}</p>
+                    <p class="card-text"><span style="font-weight: bold">Pantone Value:</span>  {{post.pantone_value}}</p>
+                    <p class="card-text"><span style="font-weight: bold">year:</span>  {{post.year}}</p>
                 </div>
             </div>       
         </div>
@@ -23,44 +23,24 @@
 <script>
 import navbar from '../components/navbar'
 import axios from 'axios'
+import {mapGetters, mapMutations} from "vuex";
 
 
     export default{
-        name: 'showResource',
-        data(){
-
-            return{
-                posts:[],
-                
-
-            }
-        },
-        
+        name: 'showResource',      
         components:{
             navbar
         },
-        created(){
+        computed:{
+            ... mapGetters(["post"]),
+        },
+        created: function(){
             var id = this.$route.params.id;
-            var link = 'https://reqres.in/api/unknown/'+id
-            axios.get(link).then(posts =>{
-                this.posts=posts.data.data
-                              
-            },
-                err =>{
-                     console.log(err)
-                })
+            this.$store.dispatch('getResource',id);
+            
         },
         methods:{
-            deleteUser(id){
-                var link = 'https://reqres.in/api/users/'+id
-                axios.delete(link)
-                .then(response => {
-                    alert( 'DELETE and response.status'+ response.status)
-                },
-                err =>{
-                     console.log(err)
-                })
-            },
+            ... mapMutations(["setPost"]),
             accessPage(){
                 if(localStorage.getItem("loginToken") ==null)
                 {

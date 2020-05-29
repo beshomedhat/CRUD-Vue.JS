@@ -58,58 +58,26 @@
 <script>
 import navbar from '../components/navbar'
 import axios from 'axios'
+
+import {mapGetters, mapMutations} from "vuex";
+
     export default{
         name: 'resources',
-        data(){
-
-            return{
-                posts:[],
-                pages:[]
-
-            }
-        },
-        created(){
-            axios.get('https://reqres.in/api/unknown').then(posts =>{
-                
-                this.posts=posts.data.data
-                for(let i=1; i<posts.data.total_pages+1; i++)
-                {
-                    this.pages.push(i) ;
-
-                }
-
-              
-            }
-            ,
-                err =>{
-                     console.log(err)
-                }
-            )
+        computed:{
+            ... mapGetters(["posts", "pages"]),
         },
         components:{
             navbar
         },
+        
         methods:{
-            pageData(num){
-                axios.get('https://reqres.in/api/unknown?page='+num).then(posts =>{
-                
-                this.posts=posts.data.data                
-                                
-            },
-                err =>{
-                     console.log(err)
-                })                
+            ... mapMutations(["setPosts", "setPages"]),
 
-            },
-            deleteUser(id){
-                var link = 'https://reqres.in/api/users/'+id
-                axios.delete(link)
-                .then(response => {
-                    alert( 'DELETE and response.status'+ response.status)
-                },
-                err =>{
-                     console.log(err)
-                })
+            
+            
+            pageData(num){
+                   this.$store.dispatch('pageData',num);            
+
             },
             accessPage(){
                 if(localStorage.getItem("loginToken") ==null)
@@ -118,8 +86,13 @@ import axios from 'axios'
                 }
             }
         },
+        created: function(){
+            this.$store.dispatch('getResources');
+        },
         beforeMount(){
-            this.accessPage()
+            this.accessPage();
+           
+
         }
     }
 </script>

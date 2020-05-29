@@ -54,50 +54,22 @@
 <script>
 import navbar from '../components/navbar'
 import axios from 'axios'
+import {mapGetters, mapMutations} from "vuex";
+
     export default{
         name: 'users',
-        data(){
-
-            return{
-                posts:[],
-                pages:[]
-
-            }
-        },
-        created(){
-            axios.get('https://reqres.in/api/users').then(posts =>{
-                
-                this.posts=posts.data.data                
-                for(let i=1; i<posts.data.total_pages+1; i++)
-                {
-                    this.pages.push(i) ;
-
-                }
-                                
-            })
-
+        computed:{
+            ... mapGetters(["posts", "pages"]),
         },
         methods:{
+            ... mapMutations(["setPosts", "setPages"]),
+
             pageData(num){
-                axios.get('https://reqres.in/api/users?page='+num).then(posts =>{
-                
-                this.posts=posts.data.data                
-                                
-            },
-                err =>{
-                     console.log(err)
-                })                
+                   this.$store.dispatch('pageUsersData',num);            
 
             },
             deleteUser(id){
-                var link = 'https://reqres.in/api/users/'+id
-                axios.delete(link)
-                .then(response => {
-                    alert( 'DELETE and response.status'+ response.status)
-                },
-                err =>{
-                     console.log(err)
-                })
+                this.$store.dispatch('deleteUser',id);  
             },
             accessPage(){
                 if(localStorage.getItem("loginToken") ==null)
@@ -108,6 +80,9 @@ import axios from 'axios'
         },
         components:{
             navbar
+        },
+        created: function(){
+            this.$store.dispatch('getusers');
         },
         beforeMount(){
             this.accessPage()

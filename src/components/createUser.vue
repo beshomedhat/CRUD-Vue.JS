@@ -29,15 +29,6 @@ import axios from 'axios'
 
     export default{
         name: 'createUser',
-        data(){
-
-            return{
-                posts:[],
-                
-
-            }
-        },
-        
         components:{
             navbar
         },
@@ -54,22 +45,11 @@ import axios from 'axios'
                     alert('enter your data');
                 }
                 else{
-                var id = this.$route.params.id;
-                var link = 'https://reqres.in/api/users/2/'+id
-                axios.post(link, {
-                body: JSON.stringify({
-                    name: document.getElementById('name').value,
-                    job: document.getElementById('job').value
-                })
-                })
-                .then(response => {
-                    alert("response.status = " + response.status);
-                },
-                err =>{
-                     console.log(err)
-                })
-                }
+                let name= document.getElementById('name').value;
+                let job= document.getElementById('job').value;
+                this.$store.dispatch('postUser',name,job);   
                 
+                }
             }
         }
 
@@ -81,8 +61,7 @@ import axios from 'axios'
 .auth-content
 {
     background-color:whitesmoke;
-    width: 40%;
-    
+    width: 40%;  
     border-radius: 0.5rem;
 }
 </style>

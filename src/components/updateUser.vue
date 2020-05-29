@@ -55,19 +55,10 @@ import axios from 'axios'
                 }
                 else{
                 var id = this.$route.params.id;
-                var link = 'https://reqres.in/api/users/2/'+id
-                axios.put(link, {
-                body: JSON.stringify({
-                    name: document.getElementById('name').value,
-                    job: document.getElementById('job').value
-                })
-                })
-                .then(response => {
-                    alert("response.status = " + response.status);
-                },
-                err =>{
-                     console.log(err)
-                })
+                let name= document.getElementById('name').value;
+                let job= document.getElementById('job').value;
+                this.$store.dispatch('updateUser',id,name,job);   
+                
                 }
                 
             },
