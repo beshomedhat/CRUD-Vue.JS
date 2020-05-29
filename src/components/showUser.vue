@@ -6,12 +6,12 @@
         <div class="auth-content p-5">
             <div class="card text-center">
                 <div class="card-header" style="font-weight: bold;">
-                    {{posts.first_name}} {{posts.last_name}} 
+                    {{post.first_name}} {{post.last_name}} 
                 </div>
                 <span style="font-weight: bold"></span>
                 <div class="card-body">
-                    <p class="card-text"><span style="font-weight: bold">Avatar:</span> {{posts.avatar}}</p>
-                    <p class="card-text"><span style="font-weight: bold">Email:</span>  {{posts.email}}</p>
+                    <p class="card-text"><span style="font-weight: bold">Avatar:</span> {{post.avatar}}</p>
+                    <p class="card-text"><span style="font-weight: bold">Email:</span>  {{post.email}}</p>
                 </div>
             </div>       
         </div>
@@ -22,45 +22,23 @@
 <script>
 import navbar from '../components/navbar'
 import axios from 'axios'
-
+import {mapGetters, mapMutations} from "vuex";
 
     export default{
         name: 'showUser',
-        data(){
-
-            return{
-                posts:[],
-                
-
-            }
-        },
-        
         components:{
             navbar
         },
-        created(){
+        computed:{
+            ... mapGetters(["post"]),
+        },
+        created: function(){
             var id = this.$route.params.id;
-            var link = 'https://reqres.in/api/users/'+id
-            axios.get(link).then(posts =>{
-                this.posts=posts.data.data
-                
-              
-            },
-                err =>{
-                     console.log(err)
-                })
+            this.$store.dispatch('getuser',id);
+            
         },
         methods:{
-            deleteUser(id){
-                var link = 'https://reqres.in/api/users/'+id
-                axios.delete(link)
-                .then(response => {
-                    alert( 'DELETE and response.status'+ response.status)
-                },
-                err =>{
-                     console.log(err)
-                })
-            },
+            ... mapMutations(["setPost"]),
             accessPage(){
                 if(localStorage.getItem("loginToken") ==null)
                 {

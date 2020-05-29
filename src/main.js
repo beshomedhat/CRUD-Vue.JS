@@ -17,6 +17,9 @@ import index from './components/index'
 import resources from './components/resources'
 import showResource from './components/showResource'
 
+import  store  from './store/store'
+
+
 
 
 
@@ -75,6 +78,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
